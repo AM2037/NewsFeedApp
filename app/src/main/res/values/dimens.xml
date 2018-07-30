@@ -1,25 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin">16dp</dimen>
+    <dimen name="h_margin">8dp</dimen>
+    <dimen name="d_margin">6dp</dimen>
+    <dimen name="padding">16dp</dimen>
+    <dimen name="v_padding">8dp</dimen>
+    <dimen name="v_padding2">2dp</dimen>
+    <dimen name="elevation">5dp</dimen>
+    <dimen name="divider">0dp</dimen>
 
-    <!-- Search -->
-    <dimen name="search_margin">8dp</dimen>
-    <!-- List Card Views -->
+    <!-- IMG View -->
+    <dimen name="image_h">175dp</dimen>
+
+    <!-- TextViews -->
+    <dimen name="headline_text">20sp</dimen>
+    <dimen name="paragraph_text">16sp</dimen>
+    <dimen name="topic_date_text">12sp</dimen>
+    <dimen name="author_text">10sp</dimen>
+    <dimen name="headline_margin">4dp</dimen>
+
+    <!-- Search
+    <dimen name="search_margin">8dp</dimen> -->
+
+    <!-- List Card Views
     <dimen name="list_card_margin">15dp</dimen>
     <dimen name="list_card_corner">4dp</dimen>
 
-    <!-- Image Card Views -->
+    Image Card Views
     <dimen name="img_width">150dp</dimen>
     <dimen name="img_height">90dp</dimen>
     <dimen name="card_margin">6dp</dimen>
 
-    <dimen name="padding">16dp</dimen>
 
-    <!-- Card TextViews -->
+    Card TextViews
     <dimen name="card_headline">16sp</dimen>
     <dimen name="card_headline_margin">4dp</dimen>
     <dimen name="card_topic_date">12sp</dimen>
     <dimen name="card_author">10sp</dimen>
-    <dimen name="divider">0dp</dimen>
+    <dimen name="divider">0dp</dimen> -->
 
 </resources>

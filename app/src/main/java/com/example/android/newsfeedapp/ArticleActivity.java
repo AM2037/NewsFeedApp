@@ -33,8 +33,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
     /* TextView displayed when list is empty */
     private TextView mEmptyStateTextView;
 
-    /* Search */
-    private SearchView mSearchField;
+    /* Search
+    private SearchView mSearchField;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +47,11 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         mEmptyStateTextView = findViewById(R.id.empty_view);
         articleListView.setEmptyView(mEmptyStateTextView);
 
-        /* Search button and field */
+        /* Search button and field
         Button mSearchButton = findViewById(R.id.search_button);
         mSearchField = findViewById(R.id.search_field);
         mSearchField.setIconified(true);
-        mSearchField.setQueryHint(getString(R.string.search_hint2));
+        mSearchField.setQueryHint(getString(R.string.search_hint2));*/
 
 
         /* Create new adapter taking an empty list of articles as input */

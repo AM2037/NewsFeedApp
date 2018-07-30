@@ -5,8 +5,11 @@
     <color name="colorAccent">#ffd7ff</color>
 
     <color name="divider">#aeaeae</color>
+    <color name="divider2">#ededed</color>
     <color name="main_text">#212121</color>
     <color name="description_text">#666666</color>
+    <color name="background">#FFFFFF</color>
+
 
 
 
