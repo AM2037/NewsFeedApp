@@ -39,7 +39,6 @@
                 android:layout_marginLeft="@dimen/h_margin"
                 android:layout_marginRight="@dimen/h_margin"
                 android:paddingBottom="@dimen/v_padding"
-                android:text="@string/test_headline"
                 android:ellipsize="end"
                 android:lines="2"
                 android:textColor="@color/main_text"
@@ -55,7 +54,6 @@
                 android:layout_marginLeft="@dimen/h_margin"
                 android:layout_marginRight="@dimen/h_margin"
                 android:paddingBottom="@dimen/v_padding"
-                android:text="@string/test_paragraph"
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:textColor="@color/main_text"
@@ -72,7 +70,6 @@
                 android:layout_marginStart="@dimen/h_margin"
                 android:layout_toEndOf="@id/article_topic"
                 android:layout_toRightOf="@id/article_topic"
-                android:text="@string/test_author"
                 android:textStyle="italic" />
 
             <TextView
@@ -83,7 +80,6 @@
                 android:layout_marginLeft="@dimen/h_margin"
                 android:layout_marginStart="@dimen/h_margin"
                 android:layout_marginTop="@dimen/headline_margin"
-                android:text="@string/test_topic"
                 android:textAllCaps="true"
                 android:textColor="@color/description_text"
                 android:textSize="@dimen/topic_date_text" />
@@ -104,7 +100,6 @@
                 android:paddingLeft="@dimen/headline_margin"
                 android:paddingRight="@dimen/headline_margin"
                 android:paddingTop="@dimen/v_padding2"
-                android:text="@string/test_date"
                 android:textAllCaps="true"
                 android:textColor="@color/description_text"
                 android:textSize="@dimen/topic_date_text" />

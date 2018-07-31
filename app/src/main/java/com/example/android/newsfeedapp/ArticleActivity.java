@@ -30,8 +30,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
     /* Adapter for articles list */
     private ArticleAdapter mAdapter;
 
-    /* TextView displayed when list is empty */
-    private TextView mEmptyStateTextView;
+    /* TextView displayed when list is empty
+    private TextView mEmptyStateTextView;*/
 
     /* Search
     private SearchView mSearchField;*/
@@ -44,8 +44,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         /* Find reference to {@link ListView} in layout */
         ListView articleListView = findViewById(R.id.list);
 
-        mEmptyStateTextView = findViewById(R.id.empty_view);
-        articleListView.setEmptyView(mEmptyStateTextView);
+        /*mEmptyStateTextView = findViewById(R.id.empty_view);
+        articleListView.setEmptyView(mEmptyStateTextView);*/
 
         /* Search button and field
         Button mSearchButton = findViewById(R.id.search_button);
@@ -79,7 +79,7 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
             }
         });
 
-        // Get a reference to ConnectivityManager to check state of the network connectivity
+        /* Get a reference to ConnectivityManager to check state of the network connectivity */
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -102,8 +102,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
             View loadingIndicator = findViewById(R.id.progress_indicator);
             loadingIndicator.setVisibility(View.GONE);
 
-            // Update empty state with no connection error message
-            mEmptyStateTextView.setText(R.string.no_internet_connection);
+            /* Update empty state with no connection error message */
+            //mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
         // TODO: Set item click listener on search button (see c0dexter github line 124) try catch
@@ -116,8 +116,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
 
     @Override
     public void onLoadFinished(Loader<List<Article>> loader, List<Article> articles) {
-        // Set empty state text to display "No articles found."
-        mEmptyStateTextView.setText(R.string.no_articles);
+        /* Set empty state text to display "No articles found."
+        mEmptyStateTextView.setText(R.string.no_articles);*/
 
         // Clear previous data from adapter
         mAdapter.clear();
@@ -133,6 +133,7 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         // Clear existing data from adapter on reset
         mAdapter.clear();
     }
+
 }
 
 

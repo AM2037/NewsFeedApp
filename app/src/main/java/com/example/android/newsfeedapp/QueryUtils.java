@@ -54,10 +54,10 @@ public final class QueryUtils {
         }
 
         // Extract relevant fields from the JSON response and create a list of {@link Earthquake}s
-        List<Article> myNews = extractFeatureFromJson(jsonResponse);
+        List<Article> articles = extractFeatureFromJson(jsonResponse);
 
         // Return the list of {@link Article}s
-        return myNews;
+        return articles;
     }
 
 
@@ -112,7 +112,15 @@ public final class QueryUtils {
                 // for that article (i.e. thumbnail url, headline, etc.)
                 JSONObject fields = currentArticle.getJSONObject("fields");
 
-                // Extract the JSONArray with key "tags" to get author, etc.
+                // Extract the value for the key "thumbnail"
+                //String image = fields.getString("thumbnail");
+                //Log.i(LOG_TAG, "The image is located at: " + image);
+
+                // Extract value for key "byline" to get contributor
+                String author = fields.getString("byline");
+                Log.i(LOG_TAG, "The author is: " + author);
+
+                /*Extract the JSONArray with key "tags" to get author, etc.
 
                 JSONArray authorArray = currentArticle.getJSONArray("tags");
                 // Extract the value for the key called "contributor"; author = contributor
@@ -140,7 +148,7 @@ public final class QueryUtils {
                 } else {
                     // missing info on author
                     author = "Missing contributor(s) info";
-                }
+                }*/
 
                 // Extract the value for the key called "webTitle"; title = headline
                 String title = currentArticle.getString("webTitle");

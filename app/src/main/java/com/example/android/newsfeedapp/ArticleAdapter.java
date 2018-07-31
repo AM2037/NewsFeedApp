@@ -47,12 +47,12 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         Log.i(LOG_TAG, "The item is positioned at " + position);
 
         /* Find TextView in the list_item.xml layout with the ID article_topic */
-        TextView topicTextView = listItemView.findViewById(R.id.article_topic);
+        TextView topicTextView = listItemView.findViewById(R.id.article_title);
         assert currentArticle != null;
         topicTextView.setText(currentArticle.getTopic());
 
         /* Find TextView in the list_item.xml layout with ID article_title */
-        TextView headlineTextView = listItemView.findViewById(R.id.article_title);
+        TextView headlineTextView = listItemView.findViewById(R.id.article_topic);
         headlineTextView.setText(currentArticle.getHeadline());
 
         /* Find TextView in list_item.xml layout with ID article_contributor */

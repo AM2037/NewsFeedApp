@@ -4,7 +4,7 @@ import android.media.Image;
 
 /**
  * {@link Article} represents a single article from the Guardian News Feed.
- * Each object has 5 properties: topic, headline, contributor, date, and url.
+ * Each object has 6 properties: topic, headline, image, contributor, date, and url.
  */
 public class Article {
 
@@ -12,13 +12,13 @@ public class Article {
     private String mTopic;
 
     /* Image associated with the article
-    private int mImageResourceId;
+    private String mImageResourceId;
     /**
      * static and final are access modifiers, can never change values aka constant
      * Constant value that represents no image was provided for this word
 
 
-    private static final int NO_IMAGE_PROVIDED = -1;*/
+    private static final int NO_IMAGE_PROVIDED = -1; */
 
     // Headline for the article
     private String mHeadline;
@@ -35,6 +35,7 @@ public class Article {
     /**
      * Create a new Article object.
      * @param topic is the topic or category of the article pulled/queried
+     * //@param imageResourceId is the image associated with the article
      * @param headline is the title of the piece
      * @param contributor represents the person or contributors who wrote it
      * @param date is when the article was published
@@ -57,13 +58,14 @@ public class Article {
     }
 
     /**
-     * Get image for the article
+     * Get image URL for the article
 
-    public int getImageResourceId() {
+
+    public String getImageResourceId() {
         return mImageResourceId;
     }
 
-    public boolean hasImage(){
+    /*public boolean hasImage(){
         return mImageResourceId != NO_IMAGE_PROVIDED;
     }*/
 
