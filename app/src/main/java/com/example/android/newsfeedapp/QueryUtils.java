@@ -39,7 +39,7 @@ public final class QueryUtils {
     }
 
     /**
-     * Query the USGS dataset and return a list of {@link Article} objects.
+     * Query the Guardian data set and return a list of {@link Article} objects.
      */
     public static List<Article> fetchArticleData(String requestUrl) {
         // Create URL object
@@ -67,11 +67,6 @@ public final class QueryUtils {
      * parsing the given JSON response.
      */
     private static List<Article> extractFeatureFromJson(String jsonResponse) {
-        /*String title;
-        String category;
-        String author;
-        String datePosted;
-        String urlSource;*/
 
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(jsonResponse)) {
@@ -102,62 +97,23 @@ public final class QueryUtils {
                 // Get a single article at position i within the list of articles
                 JSONObject currentArticle = articleArray.getJSONObject(i);
 
-                /*title = currentArticle.getString("webTitle");
-                urlSource = currentArticle.getString("webUrl");
-                date = currentArticle.getString("webPublicationDate");
-                THESE ARE THE ONES BAILEY USED IN VIDEO*/
 
                 // For a given article, extract the JSONObject associated with the
                 // key called "fields", which represents a list of all fields
                 // for that article (i.e. thumbnail url, headline, etc.)
                 JSONObject fields = currentArticle.getJSONObject("fields");
 
-                // Extract the value for the key "thumbnail"
-                //String image = fields.getString("thumbnail");
-                //Log.i(LOG_TAG, "The image is located at: " + image);
 
                 // Extract value for key "byline" to get contributor
                 String author = fields.getString("byline");
                 Log.i(LOG_TAG, "The author is: " + author);
 
-                /*Extract the JSONArray with key "tags" to get author, etc.
-
-                JSONArray authorArray = currentArticle.getJSONArray("tags");
-                // Extract the value for the key called "contributor"; author = contributor
-                String author = currentArticle.getString("contributor");
-                Log.i(LOG_TAG, "Author's name: " + author);
-
-                //Concatenation of author name and type of author (pulled from JSON)
-                StringBuilder authorBuilder = new StringBuilder();
-                authorBuilder.append(author);
-
-                //Check for 2nd author from @TheBaileyBrew github
-                if (authorArray.length() > 1 ){
-                    JSONObject secondaryAuthor = authorArray.getJSONObject(1);
-                    String secondAuthor = secondaryAuthor.getString("webTitle");
-                    authorBuilder.append(" & ");
-                    authorBuilder.append(secondAuthor);
-                }
-                author = authorBuilder.toString();
-
-                // If mapping value = null or the array has at least one element
-                if (!currentArticle.isNull("tags") && authorArray.length() > 0) {
-                    // get 1st object
-                    JSONObject objectTag = (JSONObject) authorArray.get(0);
-                    Log.i(LOG_TAG, "TAG Object: " + objectTag);
-                } else {
-                    // missing info on author
-                    author = "Missing contributor(s) info";
-                }*/
 
                 // Extract the value for the key called "webTitle"; title = headline
                 String title = currentArticle.getString("webTitle");
                 Log.i(LOG_TAG, "Article title: " + title);
 
 
-                /*Extract the value for the key called "thumbnail"; image = imageResourceId
-                String image = fields.getString("thumbnail");
-                Log.i(LOG_TAG, "Article Image URL: " + image);*/
 
                 // Extract the value for the key called "sectionName"; category = topic
                 String category = currentArticle.getString("sectionName");

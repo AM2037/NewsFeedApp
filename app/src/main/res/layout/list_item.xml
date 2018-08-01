@@ -1,35 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/divider2"
+    android:background="@color/colorPrimary"
     android:clipToPadding="false"
     android:paddingLeft="@dimen/padding"
     android:paddingRight="@dimen/padding"
     android:paddingTop="@dimen/v_padding"
-    android:paddingBottom="@dimen/v_padding">
+    android:paddingBottom="@dimen/v_padding"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="@color/list"
         android:elevation="@dimen/elevation"
         tools:ignore="UnusedAttribute">
 
-        <!-- Image associated with the article -->
-        <ImageView
-            android:id="@+id/article_img"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/image_h"
-            android:contentDescription="@string/content_desc"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/article_img"
             android:padding="@dimen/v_padding">
 
             <TextView
@@ -38,14 +30,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/h_margin"
                 android:layout_marginRight="@dimen/h_margin"
-                android:paddingBottom="@dimen/v_padding"
                 android:ellipsize="end"
                 android:lines="2"
                 android:textColor="@color/main_text"
                 android:textSize="@dimen/headline_text"
                 android:textStyle="bold" />
 
-            <!-- Shows part of body -->
             <TextView
                 android:id="@+id/paragraph_text"
                 android:layout_width="wrap_content"
@@ -105,4 +95,4 @@
                 android:textSize="@dimen/topic_date_text" />
         </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

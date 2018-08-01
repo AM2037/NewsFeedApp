@@ -12,9 +12,7 @@ import android.os.Bundle;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,11 +28,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
     /* Adapter for articles list */
     private ArticleAdapter mAdapter;
 
-    /* TextView displayed when list is empty
-    private TextView mEmptyStateTextView;*/
-
-    /* Search
-    private SearchView mSearchField;*/
+    /* TextView displayed when list is empty */
+    private TextView mEmptyStateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +39,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         /* Find reference to {@link ListView} in layout */
         ListView articleListView = findViewById(R.id.list);
 
-        /*mEmptyStateTextView = findViewById(R.id.empty_view);
-        articleListView.setEmptyView(mEmptyStateTextView);*/
-
-        /* Search button and field
-        Button mSearchButton = findViewById(R.id.search_button);
-        mSearchField = findViewById(R.id.search_field);
-        mSearchField.setIconified(true);
-        mSearchField.setQueryHint(getString(R.string.search_hint2));*/
+        mEmptyStateTextView = findViewById(R.id.empty_view);
+        articleListView.setEmptyView(mEmptyStateTextView);
 
 
         /* Create new adapter taking an empty list of articles as input */
@@ -60,7 +49,7 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         /* Set the adapter on the {@link ListView} to populate list in UI */
         articleListView.setAdapter(mAdapter);
 
-        // When clicking on an item it will send users to the article location on The Guardian
+        /* When clicking on an item it will send users to the article location on The Guardian */
         articleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
@@ -83,11 +72,11 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        // Get details on currently active default data network
+        /* Get details on currently active default data network */
         assert connMgr != null;
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        // If there's a connection, fetch data
+        /* If there's a connection, fetch data */
         if (networkInfo != null && networkInfo.isConnected()) {
             // Get a reference to the LoaderManager, in order to interact with loaders.
             LoaderManager loaderManager = getLoaderManager();
@@ -103,10 +92,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
             loadingIndicator.setVisibility(View.GONE);
 
             /* Update empty state with no connection error message */
-            //mEmptyStateTextView.setText(R.string.no_internet_connection);
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
-
-        // TODO: Set item click listener on search button (see c0dexter github line 124) try catch
 
     }
     @Override
@@ -116,13 +103,17 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
 
     @Override
     public void onLoadFinished(Loader<List<Article>> loader, List<Article> articles) {
-        /* Set empty state text to display "No articles found."
-        mEmptyStateTextView.setText(R.string.no_articles);*/
+        // Hide loading indicator because the data has been loaded
+        View loadingIndicator = findViewById(R.id.progress_indicator);
+        loadingIndicator.setVisibility(View.GONE);
 
-        // Clear previous data from adapter
+        /* Set empty state text to display "No articles found." */
+        mEmptyStateTextView.setText(R.string.no_articles);
+
+        /* Clear previous data from adapter */
         mAdapter.clear();
 
-        // Add articles to List if there's a valid one, which will trigger ListView to update
+        /* Add articles to List if there's a valid one, which will trigger ListView to update */
         if (articles != null && !articles.isEmpty()) {
             mAdapter.addAll(articles);
         }
