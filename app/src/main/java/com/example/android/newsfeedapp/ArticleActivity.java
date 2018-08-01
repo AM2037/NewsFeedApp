@@ -68,15 +68,15 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
             }
         });
 
-        /* Get a reference to ConnectivityManager to check state of the network connectivity */
+        // Get a reference to ConnectivityManager to check state of the network connectivity
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        /* Get details on currently active default data network */
+        // Get details on currently active default data network
         assert connMgr != null;
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        /* If there's a connection, fetch data */
+        // If there's a connection, fetch data
         if (networkInfo != null && networkInfo.isConnected()) {
             // Get a reference to the LoaderManager, in order to interact with loaders.
             LoaderManager loaderManager = getLoaderManager();
@@ -91,7 +91,7 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
             View loadingIndicator = findViewById(R.id.progress_indicator);
             loadingIndicator.setVisibility(View.GONE);
 
-            /* Update empty state with no connection error message */
+            // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
@@ -116,6 +116,23 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         /* Add articles to List if there's a valid one, which will trigger ListView to update */
         if (articles != null && !articles.isEmpty()) {
             mAdapter.addAll(articles);
+        } else {
+            /* Get a reference to ConnectivityManager to check state of the network connectivity */
+            ConnectivityManager connMgr = (ConnectivityManager)
+                    getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            /* Get details on currently active default data network */
+            assert connMgr != null;
+            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+            if (networkInfo != null && networkInfo.isConnected()) {
+
+                // Set empty text to display no articles found
+                mEmptyStateTextView.setText(R.string.no_articles);
+            } else {
+                // Update empty state with no connection error
+                mEmptyStateTextView.setText(R.string.no_internet_connection);
+            }
         }
     }
 
