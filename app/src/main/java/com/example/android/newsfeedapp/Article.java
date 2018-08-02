@@ -1,6 +1,8 @@
 package com.example.android.newsfeedapp;
 
 
+import android.graphics.Bitmap;
+
 /**
  * {@link Article} represents a single article from the Guardian News Feed.
  * Each object has 6 properties: topic, headline, image, contributor, date, and url.
@@ -22,6 +24,9 @@ public class Article {
     // Get URL
     private String mUrl;
 
+    // Get bitmap
+    private Bitmap mThumbnail;
+
     /**
      * Create a new Article object.
      * @param headline is the title of the piece
@@ -29,13 +34,15 @@ public class Article {
      * @param contributor represents the person or contributors who wrote it
      * @param date is when the article was published
      * @param url is the website URL to the article itself
+     * @param thumbnail is the image associated with the article
      */
-    public Article(String headline, String topic, String contributor, String date, String url) {
+    public Article(String headline, String topic, String contributor, String date, String url, Bitmap thumbnail) {
         mHeadline = headline;
         mTopic = topic;
         mContributor = contributor;
         mDate = date;
         mUrl = url;
+        mThumbnail = thumbnail;
     }
 
     /**
@@ -73,6 +80,13 @@ public class Article {
      */
     public String getUrl() {
         return mUrl;
+    }
+
+    /**
+     * Get Bitmap image
+     */
+    public Bitmap getThumbnail() {
+        return mThumbnail;
     }
 
 }

@@ -119,11 +119,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         if(!startDate.equals("")){
-            uriBuilder.appendQueryParameter("start date", startDate);
-        } else {
-            uriBuilder.appendQueryParameter("end date", endDate);
+            uriBuilder.appendQueryParameter("start-date", startDate);
         }
-
         if(todayValue){
             uriBuilder.appendQueryParameter("end-date", getThisDate());
         } else {
@@ -131,7 +128,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         }
         uriBuilder.appendQueryParameter("order-by", orderBy);
 
-        return new ArticleLoader(this, uriBuilder.toString());
+        //return new ArticleLoader(this, uriBuilder.toString());
+        return new ArticleLoader(this, GUARDIAN_REQUEST_URL);
 
     }
 
@@ -142,7 +140,7 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         loadingIndicator.setVisibility(View.GONE);
 
         /* Set empty state text to display "No articles found." */
-        mEmptyStateTextView.setText(R.string.no_articles);
+        //mEmptyStateTextView.setText(R.string.no_articles);
 
         /* Clear previous data from adapter */
         mAdapter.clear();
@@ -155,7 +153,7 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
 
 
                 // Set empty text to display no articles found
-                mEmptyStateTextView.setText(R.string.no_articles);
+                //mEmptyStateTextView.setText(R.string.no_articles);
             } else {
                 // Update empty state with no connection error
                 mEmptyStateTextView.setText(R.string.no_internet_connection);

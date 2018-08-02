@@ -1,12 +1,14 @@
 package com.example.android.newsfeedapp;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -38,7 +40,8 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         /* Check for repeating view */
         View listItemView = convertView;
         if(listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
+            listItemView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.list_item, parent, false);
         }
 
         /* Get {@link Article} object located here on the list */
@@ -51,13 +54,19 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         assert currentArticle != null;
         topicTextView.setText(currentArticle.getTopic());
 
+        /* Find ImageView in list_item.xml layout with ID article_img */
+        Bitmap articlePhoto = currentArticle.getThumbnail();
+        ImageView bitmapView = listItemView.findViewById(R.id.article_img);
+        bitmapView.setImageBitmap(articlePhoto);
+
         /* Find TextView in the list_item.xml layout with ID article_title */
         TextView headlineTextView = listItemView.findViewById(R.id.article_title);
         headlineTextView.setText(currentArticle.getHeadline());
 
+        String articleAuthor = "By " + currentArticle.getContributor() + " ";
         /* Find TextView in list_item.xml layout with ID article_contributor */
         TextView contributorTextVIew = listItemView.findViewById(R.id.article_contributor);
-        contributorTextVIew.setText(currentArticle.getContributor());
+        contributorTextVIew.setText(articleAuthor);
 
 
         /* Find TextView in list_item.xml with ID article_date */

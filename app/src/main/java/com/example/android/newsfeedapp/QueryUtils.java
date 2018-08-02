@@ -1,5 +1,7 @@
 package com.example.android.newsfeedapp;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -104,6 +106,10 @@ public final class QueryUtils {
                 JSONObject fields = currentArticle.getJSONObject("fields");
 
 
+                // Extract value for key "thumbnail" to get image associated with article
+                String thumbnail = fields.optString("thumbnail");
+                Log.i(LOG_TAG, "The image is located at: " + thumbnail);
+
                 // Extract value for key "byline" to get contributor
                 String author = fields.getString("byline");
                 Log.i(LOG_TAG, "The author is: " + author);
@@ -137,7 +143,7 @@ public final class QueryUtils {
 
                 // Create a new {@link Article} object with the headline, topic
                 // contributor, date, and url from the JSON response.
-                Article article = new Article(title, category, author, published, address);
+                Article article = new Article(title, category, author, published, address, dlBitmap(thumbnail));
 
                 // Add the new {@link Article} to the list of articles.
                 myNews.add(article);
@@ -154,6 +160,27 @@ public final class QueryUtils {
 
         // Return the list of earthquakes
         return myNews;
+    }
+
+    /**
+     * Return thumbnail image from URL Use higher res if possible
+     */
+    private static Bitmap dlBitmap(String initialUrl) {
+        Bitmap bitmap = null;
+        String newUrl = initialUrl.replace
+                (initialUrl.substring(initialUrl.lastIndexOf("/")),"/1000.jpg");
+        try {
+            InputStream inputStream = new URL(newUrl).openStream();
+            bitmap = BitmapFactory.decodeStream(inputStream);
+        } catch (Exception e) {
+            try {
+                InputStream inputStream = new URL(initialUrl).openStream();
+                bitmap = BitmapFactory.decodeStream(inputStream);
+            } catch (Exception ignored) {
+
+            }
+        }
+        return bitmap;
     }
     /**
      * Returns new URL object from the given string URL.

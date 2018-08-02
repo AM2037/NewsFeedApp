@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     android:clipToPadding="false"
     android:paddingLeft="@dimen/padding"
@@ -24,12 +25,20 @@
             android:layout_height="match_parent"
             android:padding="@dimen/v_padding">
 
+            <ImageView
+                android:id="@+id/article_img"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_h"
+                tools:ignore="VectorDrawableCompat,contentDescription"
+                android:scaleType="centerCrop" />
+
             <TextView
                 android:id="@+id/article_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/h_margin"
                 android:layout_marginRight="@dimen/h_margin"
+                android:layout_below="@id/article_img"
                 android:ellipsize="end"
                 android:lines="2"
                 android:textColor="@color/main_text"
