@@ -15,6 +15,9 @@ public class Article {
     // Topic of the article
     private String mTopic;
 
+    // Body
+    private String mParagraph;
+
     // contributor(s) of the article
     private String mContributor;
 
@@ -31,14 +34,16 @@ public class Article {
      * Create a new Article object.
      * @param headline is the title of the piece
      * @param topic is the topic or category of the article pulled/queried
+     * @param paragraph is a portion of the body of the article
      * @param contributor represents the person or contributors who wrote it
      * @param date is when the article was published
      * @param url is the website URL to the article itself
      * @param thumbnail is the image associated with the article
      */
-    public Article(String headline, String topic, String contributor, String date, String url, Bitmap thumbnail) {
+    public Article(String headline, String topic, String paragraph, String contributor, String date, String url, Bitmap thumbnail) {
         mHeadline = headline;
         mTopic = topic;
+        mParagraph = paragraph;
         mContributor = contributor;
         mDate = date;
         mUrl = url;
@@ -58,6 +63,13 @@ public class Article {
      */
     public String getTopic() {
         return mTopic;
+    }
+
+    /**
+     * Get paragraph of body
+     */
+    public String getParagraph() {
+        return mParagraph;
     }
 
 

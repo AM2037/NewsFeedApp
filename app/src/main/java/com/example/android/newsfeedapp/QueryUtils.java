@@ -110,6 +110,9 @@ public final class QueryUtils {
                 String thumbnail = fields.optString("thumbnail");
                 Log.i(LOG_TAG, "The image is located at: " + thumbnail);
 
+                // Extract value for key "body"
+                String paragraph = fields.optString("bodyText");
+
                 // Extract value for key "byline" to get contributor
                 String author = fields.getString("byline");
                 Log.i(LOG_TAG, "The author is: " + author);
@@ -131,7 +134,7 @@ public final class QueryUtils {
 
                 // Format date
                 Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(published);
-                String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(date);
+                String formatDate = new SimpleDateFormat("MMM dd ''yy", Locale.US).format(date);
                 published = formatDate;
                 Log.i(LOG_TAG, "Date published: " + published);
 
@@ -143,7 +146,7 @@ public final class QueryUtils {
 
                 // Create a new {@link Article} object with the headline, topic
                 // contributor, date, and url from the JSON response.
-                Article article = new Article(title, category, author, published, address, dlBitmap(thumbnail));
+                Article article = new Article(title, category, paragraph, author, published, address, dlBitmap(thumbnail));
 
                 // Add the new {@link Article} to the list of articles.
                 myNews.add(article);

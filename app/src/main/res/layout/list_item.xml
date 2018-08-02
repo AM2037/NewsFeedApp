@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimary"
+    android:background="@color/cardview_dark_background"
     android:clipToPadding="false"
     android:paddingLeft="@dimen/padding"
     android:paddingRight="@dimen/padding"
@@ -15,7 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/list"
+        android:background="@color/main_text"
         android:elevation="@dimen/elevation"
         tools:ignore="UnusedAttribute">
 
@@ -41,9 +40,10 @@
                 android:layout_below="@id/article_img"
                 android:ellipsize="end"
                 android:lines="2"
-                android:textColor="@color/main_text"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/headline_text"
-                android:textStyle="bold" />
+                android:textAllCaps="true"
+                android:fontFamily="sans-serif"/>
 
             <TextView
                 android:id="@+id/paragraph_text"
@@ -55,7 +55,7 @@
                 android:paddingBottom="@dimen/v_padding"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:textColor="@color/main_text"
+                android:textColor="@color/divider"
                 android:textSize="@dimen/paragraph_text" />
 
             <TextView
@@ -69,6 +69,7 @@
                 android:layout_marginStart="@dimen/h_margin"
                 android:layout_toEndOf="@id/article_topic"
                 android:layout_toRightOf="@id/article_topic"
+                android:textColor="@color/colorAccent"
                 android:textStyle="italic" />
 
             <TextView

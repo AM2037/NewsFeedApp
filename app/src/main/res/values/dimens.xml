@@ -14,7 +14,7 @@
 
     <!-- TextViews -->
     <dimen name="headline_text">20sp</dimen>
-    <dimen name="paragraph_text">18sp</dimen>
+    <dimen name="paragraph_text">16sp</dimen>
     <dimen name="topic_date_text">14sp</dimen>
     <dimen name="author_text">12sp</dimen>
     <dimen name="headline_margin">6dp</dimen>

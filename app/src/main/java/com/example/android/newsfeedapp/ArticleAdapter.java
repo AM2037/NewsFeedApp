@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ArticleAdapter extends ArrayAdapter<Article> {
@@ -62,6 +64,10 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         /* Find TextView in the list_item.xml layout with ID article_title */
         TextView headlineTextView = listItemView.findViewById(R.id.article_title);
         headlineTextView.setText(currentArticle.getHeadline());
+
+        /* Find TextView in list_item.xml with ID article_paragraph */
+        TextView paragraphTextView = listItemView.findViewById(R.id.paragraph_text);
+        paragraphTextView.setText(currentArticle.getParagraph());
 
         String articleAuthor = "By " + currentArticle.getContributor() + " ";
         /* Find TextView in list_item.xml layout with ID article_contributor */

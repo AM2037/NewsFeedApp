@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/cardview_dark_background"
     tools:context=".ArticleActivity">
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/list"
         android:divider="@null"
         android:dividerHeight="@dimen/divider"
         android:drawSelectorOnTop="true"
