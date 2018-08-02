@@ -12,6 +12,7 @@
     <!-- Settings menu -->
     <string name="settings_menu_item">Settings</string> <!-- name was settings_menu_item-->
     <string name="settings_label">News Settings</string>
+    <string name="refresh_menu_item">Refresh</string>
 
     <!-- Filters: From date To date -->
     <string name="settings_start_date_label">From: (yyyy-mm-dd)</string>
@@ -23,7 +24,7 @@
 
     <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
     <string name="settings_order_by_label">Order By</string>
-    <string name="settings_order_by_key" translatable="false">order-by</string>
+    <string name="settings_order_by_key" translatable="false">orderBy</string>
     <string name="settings_order_by_default" translatable="false">settings_order_by_most_recent</string>
 
     <!-- Option to view articles based on relevance [CHAR LIMIT=20] -->
@@ -32,7 +33,7 @@
 
     <!-- Label for order-by most recent option [CHAR LIMIT=20] -->
     <string name="settings_order_by_most_recent_label">Most Recent</string>
-    <string name="settings_order_by_most_recent_value" translatable="false">latest</string> <!-- was "time" -->
+    <string name="settings_order_by_most_recent_value" translatable="false">newest</string> <!-- was "time" -->
 
     <!-- Go by this (today's) date -->
     <string name="settings_today_label">Use Today\'s Date</string>

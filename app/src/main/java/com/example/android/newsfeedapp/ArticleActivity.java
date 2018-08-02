@@ -13,11 +13,13 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -28,6 +30,7 @@ import java.util.List;
 
 public class ArticleActivity extends AppCompatActivity implements LoaderCallbacks<List<Article>> {
 
+    private static final String LOG_TAG = ArticleActivity.class.getName();
     private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?show-fields=all&api-key=c23cd533-541e-419b-b508-70647adb7468";
 
     /* Constant value for the article loader ID. Can choose any int (for multiple loaders) */
@@ -38,6 +41,10 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
 
     /* TextView displayed when list is empty */
     private TextView mEmptyStateTextView;
+
+    private LoaderManager loaderManager;
+
+    private ProgressBar loadingIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +87,7 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
 
         if (hasConnection()) {
             // Get a reference to the LoaderManager, in order to interact with loaders.
-            LoaderManager loaderManager = getLoaderManager();
+            loaderManager = getLoaderManager();
 
             // Initialize loader by passing in ID assigned above and pass in null for bundle
             // Pass in this activity for LoaderCallbacks parameter (valid b/c this activity
@@ -99,7 +106,7 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
     }
     @Override
     public Loader<List<Article>> onCreateLoader(int i, Bundle bundle) {
-        //return new ArticleLoader(this, GUARDIAN_REQUEST_URL);
+
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String startDate = sharedPrefs.getString(
                 getString(R.string.settings_start_date_key),
@@ -126,21 +133,23 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         } else {
             uriBuilder.appendQueryParameter("end-date", endDate);
         }
-        uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("orderBy", orderBy);
 
-        //return new ArticleLoader(this, uriBuilder.toString());
-        return new ArticleLoader(this, GUARDIAN_REQUEST_URL);
+        Log.e(LOG_TAG, uriBuilder.toString());
+        return new ArticleLoader(this, uriBuilder.toString());
+
+        //return new ArticleLoader(this, GUARDIAN_REQUEST_URL);
 
     }
 
     @Override
     public void onLoadFinished(Loader<List<Article>> loader, List<Article> articles) {
         // Hide loading indicator because the data has been loaded
-        View loadingIndicator = findViewById(R.id.progress_indicator);
+        loadingIndicator = findViewById(R.id.progress_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
         /* Set empty state text to display "No articles found." */
-        //mEmptyStateTextView.setText(R.string.no_articles);
+        mEmptyStateTextView.setText(R.string.no_articles);
 
         /* Clear previous data from adapter */
         mAdapter.clear();
@@ -153,7 +162,7 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
 
 
                 // Set empty text to display no articles found
-                //mEmptyStateTextView.setText(R.string.no_articles);
+                mEmptyStateTextView.setText(R.string.no_articles);
             } else {
                 // Update empty state with no connection error
                 mEmptyStateTextView.setText(R.string.no_internet_connection);
@@ -178,7 +187,15 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
 
             // If there's a connection, fetch data
         return networkInfo != null && networkInfo.isConnected();
-        }
+
+    }
+
+    public void loadJSON() {
+        mEmptyStateTextView.setText("");
+        Log.e(LOG_TAG, "Refresh");
+        loadingIndicator.setVisibility(View.VISIBLE);
+    }
+
 
 
     public String getThisDate() {
@@ -195,12 +212,18 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent settingsIntent = new Intent(this, SettingsActivity.class);
-            startActivity(settingsIntent);
-            return true;
-        }
+       switch (item.getItemId()) {
+           case R.id.on_refresh:
+               loaderManager.destroyLoader(ARTICLE_LOADER_ID);
+               Log.e(LOG_TAG, "Destroy Loader");
+               loadJSON();
+               return true;
+           case R.id.action_settings:
+               Intent settingsIntent = new Intent(this, SettingsActivity.class);
+               startActivity(settingsIntent);
+               return true;
+       }
+
         return super.onOptionsItemSelected(item);
     }
 }
