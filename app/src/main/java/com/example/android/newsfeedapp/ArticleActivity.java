@@ -1,26 +1,34 @@
 package com.example.android.newsfeedapp;
 
+import android.annotation.SuppressLint;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ArticleActivity extends AppCompatActivity implements LoaderCallbacks<List<Article>> {
 
-    private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?order-by=newest&show-fields=all&api-key=c23cd533-541e-419b-b508-70647adb7468";
+    private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?show-fields=all&api-key=c23cd533-541e-419b-b508-70647adb7468";
 
     /* Constant value for the article loader ID. Can choose any int (for multiple loaders) */
     private static final int ARTICLE_LOADER_ID = 1;
@@ -49,6 +57,7 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         /* Set the adapter on the {@link ListView} to populate list in UI */
         articleListView.setAdapter(mAdapter);
 
+
         /* When clicking on an item it will send users to the article location on The Guardian */
         articleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -68,16 +77,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
             }
         });
 
-        // Get a reference to ConnectivityManager to check state of the network connectivity
-        ConnectivityManager connMgr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        // Get details on currently active default data network
-        assert connMgr != null;
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        // If there's a connection, fetch data
-        if (networkInfo != null && networkInfo.isConnected()) {
+        if (hasConnection()) {
             // Get a reference to the LoaderManager, in order to interact with loaders.
             LoaderManager loaderManager = getLoaderManager();
 
@@ -98,7 +99,40 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
     }
     @Override
     public Loader<List<Article>> onCreateLoader(int i, Bundle bundle) {
-        return new ArticleLoader(this, GUARDIAN_REQUEST_URL);
+        //return new ArticleLoader(this, GUARDIAN_REQUEST_URL);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String startDate = sharedPrefs.getString(
+                getString(R.string.settings_start_date_key),
+                getString(R.string.settings_start_date_default));
+        String endDate = sharedPrefs.getString(
+                getString(R.string.settings_end_date_key),
+                getThisDate());
+        Boolean todayValue = sharedPrefs.getBoolean(
+                getString(R.string.settings_today_key),
+                Boolean.valueOf(getString(R.string.settings_today_default)));
+        String orderBy = sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+        );
+
+        Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        if(!startDate.equals("")){
+            uriBuilder.appendQueryParameter("start date", startDate);
+        } else {
+            uriBuilder.appendQueryParameter("end date", endDate);
+        }
+
+        if(todayValue){
+            uriBuilder.appendQueryParameter("end-date", getThisDate());
+        } else {
+            uriBuilder.appendQueryParameter("end-date", endDate);
+        }
+        uriBuilder.appendQueryParameter("order-by", orderBy);
+
+        return new ArticleLoader(this, uriBuilder.toString());
+
     }
 
     @Override
@@ -117,15 +151,8 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         if (articles != null && !articles.isEmpty()) {
             mAdapter.addAll(articles);
         } else {
-            /* Get a reference to ConnectivityManager to check state of the network connectivity */
-            ConnectivityManager connMgr = (ConnectivityManager)
-                    getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (hasConnection()) {
 
-            /* Get details on currently active default data network */
-            assert connMgr != null;
-            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-            if (networkInfo != null && networkInfo.isConnected()) {
 
                 // Set empty text to display no articles found
                 mEmptyStateTextView.setText(R.string.no_articles);
@@ -142,7 +169,44 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         mAdapter.clear();
     }
 
+    public boolean hasConnection(){
+            // Get a reference to ConnectivityManager to check state of the network connectivity
+            ConnectivityManager connMgr = (ConnectivityManager)
+                    getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            // Get details on currently active default data network
+            assert connMgr != null;
+            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+            // If there's a connection, fetch data
+        return networkInfo != null && networkInfo.isConnected();
+        }
+
+
+    public String getThisDate() {
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
+
 
 
 

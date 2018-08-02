@@ -19,8 +19,8 @@
     <dimen name="author_text">12sp</dimen>
     <dimen name="headline_margin">6dp</dimen>
 
-    <!-- Search
-    <dimen name="search_margin">8dp</dimen> -->
+    <!-- Search -->
+    <dimen name="search_margin">8dp</dimen>
 
     <!-- List Card Views
     <dimen name="list_card_margin">15dp</dimen>

@@ -1,6 +1,46 @@
 <resources>
     <string name="app_name">NewsFeedApp</string>
     <string name="name">Guardian News</string>
+
+    <!-- In case user enters incorrect/no URL or parameters -->
     <string name="no_articles">No articles found.</string>
+
+    <!-- In case user loses connection or doesn't have one to start with -->
     <string name="no_internet_connection">No internet connection.</string>
+
+
+    <!-- Settings menu -->
+    <string name="settings_menu_item">Settings</string> <!-- name was settings_menu_item-->
+    <string name="settings_label">News Settings</string>
+
+    <!-- Filters: From date To date -->
+    <string name="settings_start_date_label">From: (yyyy-mm-dd)</string>
+    <string name="settings_start_date_key" translatable="false">start-date</string>
+    <string name="settings_start_date_default" translatable="false"></string>
+    <string name="settings_end_date_label">To: (yyyy-mm-dd)</string>
+    <string name="settings_end_date_key" translatable="false">end-date</string>
+    <string name="settings_end_date_default" translatable="false"></string>
+
+    <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order-by</string>
+    <string name="settings_order_by_default" translatable="false">settings_order_by_most_recent</string>
+
+    <!-- Option to view articles based on relevance [CHAR LIMIT=20] -->
+    <string name="settings_order_by_relevant_label">Relevance</string>
+    <string name="settings_order_by_relevant_value" translatable="false">relevance</string>
+
+    <!-- Label for order-by most recent option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_most_recent_label">Most Recent</string>
+    <string name="settings_order_by_most_recent_value" translatable="false">latest</string> <!-- was "time" -->
+
+    <!-- Go by this (today's) date -->
+    <string name="settings_today_label">Use Today\'s Date</string>
+    <string name="settings_today_key">change</string>
+    <string name="settings_today_default">false</string>
+
+    <!-- What user sees listed in settings menu -->
+    <string name="start_date_preference">Start Date</string>
+    <string name="end_date_preference">End Date</string>
+    <string name="order_preference">Order shown</string>
 </resources>
