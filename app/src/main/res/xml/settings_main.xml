@@ -9,23 +9,21 @@
             android:inputType="date"
             android:key="@string/settings_start_date_key"
             android:selectAllOnFocus="true"
-            android:title="@string/settings_start_date_label"/>
+            android:title="@string/settings_start_date_label" />
     </PreferenceCategory>
-
-
 
     <PreferenceCategory
         android:title="@string/end_date_preference">
-        <SwitchPreference
-            android:defaultValue="@string/settings_today_default"
-            android:key="@string/settings_today_key"
-            android:title="@string/settings_today_label"/>
         <EditTextPreference
             android:defaultValue="@string/settings_end_date_default"
             android:inputType="date"
             android:key="@string/settings_end_date_key"
             android:selectAllOnFocus="true"
             android:title="@string/settings_end_date_label"/>
+        <SwitchPreference
+            android:defaultValue="@string/settings_today_default"
+            android:key="@string/settings_today_key"
+            android:title="@string/settings_today_label"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -38,8 +36,4 @@
             android:title="@string/settings_order_by_label" />
 
     </PreferenceCategory>
-
-
-
-
 </PreferenceScreen>

@@ -126,20 +126,17 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         if(!startDate.equals("")){
-            uriBuilder.appendQueryParameter("start-date", startDate);
-        }
-        if(todayValue){
-            uriBuilder.appendQueryParameter("end-date", getThisDate());
+            uriBuilder.appendQueryParameter("from-date", startDate);
         } else {
-            uriBuilder.appendQueryParameter("end-date", endDate);
+            uriBuilder.appendQueryParameter("to-date", endDate);
         }
-        uriBuilder.appendQueryParameter("orderBy", orderBy);
+
+        if(todayValue){
+            uriBuilder.appendQueryParameter("to-date", getThisDate());
+        uriBuilder.appendQueryParameter("orderBy", orderBy); }
 
         Log.e(LOG_TAG, uriBuilder.toString());
         return new ArticleLoader(this, uriBuilder.toString());
-
-        //return new ArticleLoader(this, GUARDIAN_REQUEST_URL);
-
     }
 
     @Override
