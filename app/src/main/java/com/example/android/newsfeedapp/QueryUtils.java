@@ -29,7 +29,9 @@ import java.util.Locale;
  */
 public final class QueryUtils {
 
-    /** Tag for the log messages */
+    /**
+     * Tag for the log messages
+     */
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
     /**
@@ -61,7 +63,6 @@ public final class QueryUtils {
         // Return the list of {@link Article}s
         return articles;
     }
-
 
 
     /**
@@ -123,7 +124,6 @@ public final class QueryUtils {
                 Log.i(LOG_TAG, "Article title: " + title);
 
 
-
                 // Extract the value for the key called "sectionName"; category = topic
                 String category = currentArticle.getString("sectionName");
                 Log.i(LOG_TAG, "Section name: " + category);
@@ -167,24 +167,34 @@ public final class QueryUtils {
 
     /**
      * Return thumbnail image from URL Use higher res if possible
+     * and return {@link Bitmap} Credit to Mohammad Ali Fouani https://stackoverflow.com/q/51587354/9302422
+     *
+     * @param initialUrl is where the thumbnail is located via the API
+     * @return Bitmap
      */
+
     private static Bitmap dlBitmap(String initialUrl) {
         Bitmap bitmap = null;
-        String newUrl = initialUrl.replace
-                (initialUrl.substring(initialUrl.lastIndexOf("/")),"/1000.jpg");
-        try {
-            InputStream inputStream = new URL(newUrl).openStream();
-            bitmap = BitmapFactory.decodeStream(inputStream);
-        } catch (Exception e) {
-            try {
-                InputStream inputStream = new URL(initialUrl).openStream();
-                bitmap = BitmapFactory.decodeStream(inputStream);
-            } catch (Exception ignored) {
+        if (!"".equals(initialUrl)) {
+            String newUrl = initialUrl.replace
+                    (initialUrl.substring(initialUrl.lastIndexOf("/")), "/1000.jpg");
 
+            try {
+                // Check for better image quality
+                InputStream inputStream = new URL(newUrl).openStream();
+                bitmap = BitmapFactory.decodeStream(inputStream);
+            } catch (Exception e) {
+                try {
+                    InputStream inputStream = new URL(initialUrl).openStream();
+                    bitmap = BitmapFactory.decodeStream(inputStream);
+                } catch (Exception ignored) {
+
+                }
             }
         }
         return bitmap;
     }
+
     /**
      * Returns new URL object from the given string URL.
      */

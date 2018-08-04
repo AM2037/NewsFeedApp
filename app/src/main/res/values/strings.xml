@@ -17,10 +17,10 @@
     <!-- Filters: From date To date -->
     <string name="settings_start_date_label">From: (yyyy-mm-dd)</string>
     <string name="settings_start_date_key" translatable="false">from-date</string>
-    <string name="settings_start_date_default" translatable="false">2018-07-03</string>
+    <string name="settings_start_date_default" translatable="false"></string>
     <string name="settings_end_date_label">To: (yyyy-mm-dd)</string>
     <string name="settings_end_date_key" translatable="false">to-date</string>
-    <string name="settings_end_date_default" translatable="false">2018-08-03</string>
+    <string name="settings_end_date_default" translatable="false"></string>
 
     <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
     <string name="settings_order_by_label">Order By</string>

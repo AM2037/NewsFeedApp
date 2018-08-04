@@ -127,13 +127,14 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
 
         if(!startDate.equals("")){
             uriBuilder.appendQueryParameter("from-date", startDate);
+        } if(todayValue){
+            uriBuilder.appendQueryParameter("to-date", getThisDate());
         } else {
             uriBuilder.appendQueryParameter("to-date", endDate);
         }
 
-        if(todayValue){
-            uriBuilder.appendQueryParameter("to-date", getThisDate());
-        uriBuilder.appendQueryParameter("orderBy", orderBy); }
+
+            uriBuilder.appendQueryParameter("orderBy", orderBy);
 
         Log.e(LOG_TAG, uriBuilder.toString());
         return new ArticleLoader(this, uriBuilder.toString());
@@ -174,15 +175,15 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
     }
 
     public boolean hasConnection(){
-            // Get a reference to ConnectivityManager to check state of the network connectivity
-            ConnectivityManager connMgr = (ConnectivityManager)
-                    getSystemService(Context.CONNECTIVITY_SERVICE);
+        // Get a reference to ConnectivityManager to check state of the network connectivity
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
 
-            // Get details on currently active default data network
-            assert connMgr != null;
-            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        // Get details on currently active default data network
+        assert connMgr != null;
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-            // If there's a connection, fetch data
+        // If there's a connection, fetch data
         return networkInfo != null && networkInfo.isConnected();
 
     }
@@ -209,22 +210,25 @@ public class ArticleActivity extends AppCompatActivity implements LoaderCallback
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       switch (item.getItemId()) {
-           case R.id.on_refresh:
-               loaderManager.destroyLoader(ARTICLE_LOADER_ID);
-               Log.e(LOG_TAG, "Destroy Loader");
-               loadJSON();
-               return true;
-           case R.id.action_settings:
-               Intent settingsIntent = new Intent(this, SettingsActivity.class);
-               startActivity(settingsIntent);
-               return true;
-       }
+        /*int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);*/
+        switch (item.getItemId()) {
+            case R.id.on_refresh:
+                loaderManager.destroyLoader(ARTICLE_LOADER_ID);
+                Log.e(LOG_TAG, "Destroy Loader");
+                loadJSON();
+                return true;
+            case R.id.action_settings:
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
 }
-
-
-
-

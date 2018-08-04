@@ -59,7 +59,11 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         /* Find ImageView in list_item.xml layout with ID article_img */
         Bitmap articlePhoto = currentArticle.getThumbnail();
         ImageView bitmapView = listItemView.findViewById(R.id.article_img);
-        bitmapView.setImageBitmap(articlePhoto);
+        if (articlePhoto != null) {
+            bitmapView.setImageBitmap(articlePhoto);
+        } else {
+            bitmapView.setImageResource(R.drawable.the_guardian);
+        }
 
         /* Find TextView in the list_item.xml layout with ID article_title */
         TextView headlineTextView = listItemView.findViewById(R.id.article_title);
