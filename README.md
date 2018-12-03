@@ -13,4 +13,4 @@ I used a combination of AsyncTask and Loaders to retrieve and parse the JSON res
 ## Features additional items not in the course
 1. I created my own method hasConnection() for checking for internet connection located in ArticleActivity.java
 as well as loadJSON() directly underneath it which functions as a helper method for my refresh setting.
-2. For retreiving the images from the Guardian API I referenced Mohammad Ali Fouani's example at: https://stackoverflow.com/q/51587354/9302422 to get Bitmaps for the images. The corresponding java is located in the Article & ArticleAdapter java files as well as the list_item.xml file. 
+2. For retrieving the images from the Guardian API I referenced Mohammad Ali Fouani's example at: https://stackoverflow.com/q/51587354/9302422 to get Bitmaps for the images. The corresponding java is located in the Article & ArticleAdapter java files as well as the list_item.xml file. 
