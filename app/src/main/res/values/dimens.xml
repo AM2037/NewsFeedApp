@@ -2,6 +2,8 @@
 <resources>
     <dimen name="margin">16dp</dimen>
     <dimen name="h_margin">8dp</dimen>
+    <dimen name="card_margin">12dp</dimen>
+    <dimen name="card_padding">12dp</dimen>
     <dimen name="d_margin">6dp</dimen>
     <dimen name="padding">16dp</dimen>
     <dimen name="v_padding">8dp</dimen>
