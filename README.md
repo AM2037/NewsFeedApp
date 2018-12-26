@@ -2,7 +2,7 @@
 
 **Created for the *Grow with Google Challenge Scholarship:* Android Basics Course**
 
-Used **API 27: Android 8.1 (Oreo)**
+Used **API 27: Android 8.1 (Oreo)** -- Updated to **API 28: Android 9 (Pie)**
 
 This is the 6th project from my Udacity Android Basics Nanodegree program which is a news app that queries the Guardian API. 
 I used a combination of AsyncTask and Loaders to retrieve and parse the JSON responses from the API queries. 
