@@ -31,7 +31,9 @@ import java.util.List;
 public class ArticleActivity extends AppCompatActivity implements LoaderCallbacks<List<Article>> {
 
     private static final String LOG_TAG = ArticleActivity.class.getName();
-    private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?show-fields=all&api-key=c23cd533-541e-419b-b508-70647adb7468";
+    /* took out URL for security purposes */
+    private static final String GUARDIAN_REQUEST_URL = ""; 
+    
 
     /* Constant value for the article loader ID. Can choose any int (for multiple loaders) */
     private static final int ARTICLE_LOADER_ID = 1;
